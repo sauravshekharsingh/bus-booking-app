@@ -19,6 +19,7 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import api from "../utils/api";
 import { formatDate } from "../utils/datetime";
 import { getAuthTokenFromLocalStorage } from "../utils/token";
+import { useNavigate } from "react-router-dom";
 
 export default function BookModal({
   bus,
@@ -42,11 +43,16 @@ export default function BookModal({
   const [clientSecret, setClientSecret] = useState(null);
   const elements = useElements();
   const stripe = useStripe();
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchClientSecret() {
       setLoading(true);
       try {
+        if(fare <= 0) {
+          return;
+        }
+
         const res = await api.post(
           "/payment/create",
           { amount: fare },
@@ -180,6 +186,8 @@ export default function BookModal({
 
       setSuccess(`Payment completed. ${data.message}`);
       setSeatsBooked([...seatsBooked, ...seatsSelected]);
+
+      navigate('/booking/view')
     } catch (err) {
       console.log(err);
       setError(err?.response?.data?.message ?? err.message);
