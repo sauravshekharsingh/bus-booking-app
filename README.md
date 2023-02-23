@@ -1,4 +1,4 @@
-# Social Media App Project
+# Bus Booking Application
 The bus booking app project is a web-based platform built using NodeJS, Express, MongoDB, React, and Stripe payment gateway. It offers functionalities such as user authentication via login and signup, an admin portal for journey creation, and a user portal for booking, viewing bookings, generating invoices, processing payments, redeeming coupon codes, and managing cancellations. The app streamlines the bus booking process, making it easier and more convenient for both users and administrators.
 
 ## Functionalities
